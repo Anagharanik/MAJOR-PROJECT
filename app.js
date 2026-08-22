@@ -15,7 +15,7 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
-
+const port=process.env.PORT || 8080; 
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
@@ -24,6 +24,9 @@ const dbUrl = process.env.ATLASDB_URL;
 main()
   .then(() => {
     console.log("connection successful to DataBase ");
+
+    app.listen(port,()=>{ console.log(`server is  listening on port 8080`);
+    });
   })
   .catch((err) => {
     console.log(err);
@@ -98,6 +101,6 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error.ejs", { message });
 });
 
-app.listen(8080, () => {
+/*app.listen(port, () => { 
   console.log(" server is listening to port 8080");
-});
+});*/
